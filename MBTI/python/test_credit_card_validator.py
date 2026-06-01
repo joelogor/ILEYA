@@ -56,15 +56,55 @@ class Credit_Card_Validator(TestCase):
     
         card_number = "4388576018402626"
         
-        expected = 44823178
+        expected = "44823178"
         actual = luhn_check_step_one(card_number)
         
         self.assertEqual(expected, actual)
+        
+    def test_that_all_second_digits_from_left_are_each_doubled_and_all_summed_with_doubled_number_with_two_digit_added_to_make_one_digit_and_the_result_added(self):
+    
+        card_number = "4388576018402626"
+        
+        expected = 37
+        actual = luhn_check_step_two(card_number)
+        
+        self.assertEqual(expected, actual)
                           
+    def test_that_all_digits_in_odd_places_from_left_are_added(self):
+    
+        card_number = "4388576018402626"
         
+        expected = 38
+        actual = luhn_check_step_three(card_number)
         
+        self.assertEqual(expected, actual)
+               
+    def test_that_result_from_step_2_and_step_3_are_added(self):
+    
+        card_number = "4388576018402626"
         
+        expected = 75
+        actual = luhn_check_step_four(card_number)
         
+        self.assertEqual(expected, actual)
+
+    def test_that_result_from_step_2_and_step_3_are_added_and_if_divisible_by_10_is_valid(self):
+    
+        card_number = "4388576018410707"
+        
+        expected = "Is Valid"
+        actual = luhn_check_step_five(card_number)
+        
+        self.assertEqual(expected, actual)                
+        
+    def test_that_result_from_step_2_and_step_3_are_added_and_if_not_divisible_by_10_is_valid(self):
+    
+        card_number = "4388576018402626"
+        
+        expected = "Is Invalid"
+        actual = luhn_check_step_five(card_number)
+        
+        self.assertEqual(expected, actual)          
         
         
         
